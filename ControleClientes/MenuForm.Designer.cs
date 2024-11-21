@@ -32,6 +32,7 @@
             cadastroToolStripMenuItem = new ToolStripMenuItem();
             clienteToolStripMenuItem = new ToolStripMenuItem();
             cidadesToolStripMenuItem = new ToolStripMenuItem();
+            pedidosToolStripMenuItem1 = new ToolStripMenuItem();
             janelaToolStripMenuItem = new ToolStripMenuItem();
             cascataToolStripMenuItem = new ToolStripMenuItem();
             ladoALadoHorizontalToolStripMenuItem = new ToolStripMenuItem();
@@ -39,7 +40,6 @@
             íconesMinimizadosToolStripMenuItem = new ToolStripMenuItem();
             gerenciarToolStripMenuItem = new ToolStripMenuItem();
             pedidosToolStripMenuItem = new ToolStripMenuItem();
-            pedidosToolStripMenuItem1 = new ToolStripMenuItem();
             menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
@@ -74,6 +74,13 @@
             cidadesToolStripMenuItem.Size = new Size(224, 26);
             cidadesToolStripMenuItem.Text = "Cidades";
             cidadesToolStripMenuItem.Click += cidadesToolStripMenuItem_Click;
+            // 
+            // pedidosToolStripMenuItem1
+            // 
+            pedidosToolStripMenuItem1.Name = "pedidosToolStripMenuItem1";
+            pedidosToolStripMenuItem1.Size = new Size(224, 26);
+            pedidosToolStripMenuItem1.Text = "Pedidos";
+            pedidosToolStripMenuItem1.Click += pedidosToolStripMenuItem1_Click;
             // 
             // janelaToolStripMenuItem
             // 
@@ -120,14 +127,8 @@
             // pedidosToolStripMenuItem
             // 
             pedidosToolStripMenuItem.Name = "pedidosToolStripMenuItem";
-            pedidosToolStripMenuItem.Size = new Size(224, 26);
+            pedidosToolStripMenuItem.Size = new Size(144, 26);
             pedidosToolStripMenuItem.Text = "Pedidos";
-            // 
-            // pedidosToolStripMenuItem1
-            // 
-            pedidosToolStripMenuItem1.Name = "pedidosToolStripMenuItem1";
-            pedidosToolStripMenuItem1.Size = new Size(224, 26);
-            pedidosToolStripMenuItem1.Text = "Pedidos";
             // 
             // MenuForm
             // 

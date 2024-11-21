@@ -83,5 +83,10 @@
                 }
             }
         }
+
+        private void gridCidade_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
     }
 }

@@ -50,5 +50,10 @@ namespace ControleClientes
             cidade.MdiParent = this;
             cidade.Show();
         }
+
+        private void pedidosToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            
+        }
     }
 }

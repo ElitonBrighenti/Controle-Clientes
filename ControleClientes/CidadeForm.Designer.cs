@@ -97,6 +97,7 @@
             gridCidade.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             gridCidade.Size = new Size(900, 338);
             gridCidade.TabIndex = 7;
+            gridCidade.CellContentClick += gridCidade_CellContentClick;
             // 
             // colId
             // 
