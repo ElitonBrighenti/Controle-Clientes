@@ -60,6 +60,7 @@
             cadastroToolStripMenuItem.Name = "cadastroToolStripMenuItem";
             cadastroToolStripMenuItem.Size = new Size(82, 24);
             cadastroToolStripMenuItem.Text = "Cadastro";
+            cadastroToolStripMenuItem.Click += cadastroToolStripMenuItem_Click;
             // 
             // clienteToolStripMenuItem
             // 
@@ -79,7 +80,7 @@
             // 
             pedidosToolStripMenuItem1.Name = "pedidosToolStripMenuItem1";
             pedidosToolStripMenuItem1.Size = new Size(224, 26);
-            pedidosToolStripMenuItem1.Text = "Pedidos";
+            pedidosToolStripMenuItem1.Text = "Produto";
             pedidosToolStripMenuItem1.Click += pedidosToolStripMenuItem1_Click;
             // 
             // janelaToolStripMenuItem
@@ -127,8 +128,9 @@
             // pedidosToolStripMenuItem
             // 
             pedidosToolStripMenuItem.Name = "pedidosToolStripMenuItem";
-            pedidosToolStripMenuItem.Size = new Size(144, 26);
+            pedidosToolStripMenuItem.Size = new Size(224, 26);
             pedidosToolStripMenuItem.Text = "Pedidos";
+            pedidosToolStripMenuItem.Click += pedidosToolStripMenuItem_Click;
             // 
             // MenuForm
             // 

@@ -201,3 +201,5 @@ C:\Users\forge\Desktop\ESTUDOS\ControleClientesV4.4-CEP\ControleClientes\obj\Deb
 C:\Users\forge\Desktop\ESTUDOS\ControleClientesV4.4-CEP\ControleClientes\obj\Debug\net8.0-windows\ControleClientes.pdb
 C:\Users\forge\Desktop\ESTUDOS\ControleClientesV4.4-CEP\ControleClientes\obj\Debug\net8.0-windows\ControleClientes.genruntimeconfig.cache
 C:\Users\forge\Desktop\ESTUDOS\ControleClientesV4.4-CEP\ControleClientes\obj\Debug\net8.0-windows\ref\ControleClientes.dll
+C:\Users\forge\Desktop\ESTUDOS\ControleClientesV4.4-CEP\ControleClientes\obj\Debug\net8.0-windows\ControleClientes.PedidoForm.resources
+C:\Users\forge\Desktop\ESTUDOS\ControleClientesV4.4-CEP\ControleClientes\obj\Debug\net8.0-windows\ControleClientes.ProdutoForm.resources

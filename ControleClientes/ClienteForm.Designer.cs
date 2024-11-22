@@ -116,6 +116,7 @@
             gridCliente.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             gridCliente.Size = new Size(888, 310);
             gridCliente.TabIndex = 4;
+            gridCliente.CellContentClick += gridCliente_CellContentClick;
             // 
             // colId
             // 
@@ -359,7 +360,6 @@
             txtCep.Name = "txtCep";
             txtCep.Size = new Size(105, 27);
             txtCep.TabIndex = 8;
-
             // 
             // cmbGenero
             // 
@@ -421,6 +421,7 @@
             txtNome.Name = "txtNome";
             txtNome.Size = new Size(688, 27);
             txtNome.TabIndex = 1;
+            txtNome.TextChanged += txtNome_TextChanged;
             // 
             // label1
             // 
@@ -485,6 +486,7 @@
             Margin = new Padding(3, 4, 3, 4);
             Name = "ClienteForm";
             Text = "Cadastro de Clientes";
+            Load += ClienteForm_Load;
             tabCliente.ResumeLayout(false);
             tpClienteConsulta.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)gridCliente).EndInit();

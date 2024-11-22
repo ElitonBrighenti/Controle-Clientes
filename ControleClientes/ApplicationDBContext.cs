@@ -17,7 +17,7 @@ namespace ControleClientes
         public DbSet<Item> Itens { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseNpgsql("server=localhost;username=postgres;database=clientes;Password=root");
+            optionsBuilder.UseNpgsql("server=localhost;username=postgres;database=clientes;Password=2024");
         }
     }
 }

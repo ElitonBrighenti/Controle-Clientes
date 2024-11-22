@@ -216,7 +216,7 @@ namespace ControleClientes
 
             if (string.IsNullOrEmpty(cep))
             {
-                MessageBox.Show("Por favor, insira um CEP válido. ", "Erro" , MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Por favor, insira um CEP válido. ", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
@@ -242,6 +242,21 @@ namespace ControleClientes
             {
                 MessageBox.Show(ex.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void ClienteForm_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void gridCliente_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void txtNome_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

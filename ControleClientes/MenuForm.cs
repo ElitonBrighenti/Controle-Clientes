@@ -51,9 +51,23 @@ namespace ControleClientes
             cidade.Show();
         }
 
+        private void pedidosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            PedidoForm pedido = new PedidoForm();
+            pedido.MdiParent = this;
+            pedido.Show();
+        }
+
         private void pedidosToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            
+            ProdutoForm produto = new ProdutoForm();
+            produto.MdiParent = this;
+            produto.Show();
+        }
+
+        private void cadastroToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

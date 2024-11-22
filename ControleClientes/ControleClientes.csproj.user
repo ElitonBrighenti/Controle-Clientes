@@ -11,5 +11,11 @@
     <Compile Update="MenuForm.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="PedidoForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="ProdutoForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
   </ItemGroup>
 </Project>
