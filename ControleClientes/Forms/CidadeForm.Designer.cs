@@ -97,7 +97,6 @@
             gridCidade.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             gridCidade.Size = new Size(900, 338);
             gridCidade.TabIndex = 7;
-            gridCidade.CellContentClick += gridCidade_CellContentClick;
             // 
             // colId
             // 
@@ -170,7 +169,6 @@
             btnPesquisar.TabIndex = 3;
             btnPesquisar.Text = "Pesquisar";
             btnPesquisar.UseVisualStyleBackColor = true;
-            btnPesquisar.Click += btnPesquisar_Click;
             // 
             // txtPesquisa
             // 
@@ -287,7 +285,6 @@
             Margin = new Padding(3, 4, 3, 4);
             Name = "CidadeForm";
             Text = "Cadastro de Cidades";
-            Load += CidadeForm_Load;
             tabCidade.ResumeLayout(false);
             tpCidadeConsulta.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)gridCidade).EndInit();

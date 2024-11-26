@@ -1,4 +1,4 @@
-﻿namespace ControleClientes
+﻿namespace ControleClientes.Entidades
 {
     public enum EstadoCivil
     {

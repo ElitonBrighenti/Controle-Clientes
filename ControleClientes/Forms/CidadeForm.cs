@@ -1,4 +1,7 @@
-﻿namespace ControleClientes
+﻿using ControleClientes.Entidades;
+using ControleClientes.Repository;
+
+namespace ControleClientes
 {
     public partial class CidadeForm : Form
     {
@@ -36,6 +39,7 @@
             txtNome.Clear();
             cmbUf.SelectedIndex = -1;
         }
+
         private void btnNovo_Click(object sender, EventArgs e)
         {
             cidadeSelecionada = null;
@@ -82,21 +86,6 @@
                     tabCidade.SelectTab(tpCidadeConsulta);
                 }
             }
-        }
-
-        private void gridCidade_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
-        private void CidadeForm_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btnPesquisar_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }

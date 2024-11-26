@@ -1,4 +1,4 @@
-﻿namespace ControleClientes
+﻿namespace ControleClientes.Entidades
 {
     public class Cliente
     {

@@ -1,4 +1,6 @@
-﻿namespace ControleClientes
+﻿using ControleClientes.Entidades;
+
+namespace ControleClientes.Repository
 {
     public class CidadeRepository
     {

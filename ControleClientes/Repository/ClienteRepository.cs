@@ -1,14 +1,15 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using ControleClientes.Entidades;
+using Microsoft.EntityFrameworkCore;
 
-namespace ControleClientes
+namespace ControleClientes.Repository
 {
     public class ClienteRepository
     {
         private ApplicationDBContext _dbContext = new ApplicationDBContext();
-        
+
         public List<Cliente> ReadAll()
-        { 
-            return _dbContext.Clientes.ToList();            
+        {
+            return _dbContext.Clientes.ToList();
         }
 
         public void Create(Cliente cliente)
@@ -42,8 +43,8 @@ namespace ControleClientes
         public void Update(Cliente cliente)
         {
             Cliente clienteExistente = GetById(cliente.Id);
-            if (clienteExistente != null) 
-            { 
+            if (clienteExistente != null)
+            {
                 clienteExistente.Nome = cliente.Nome;
                 clienteExistente.Email = cliente.Email;
                 _dbContext.SaveChanges();

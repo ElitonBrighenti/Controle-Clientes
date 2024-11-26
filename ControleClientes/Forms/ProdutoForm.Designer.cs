@@ -29,20 +29,26 @@
         private void InitializeComponent()
         {
             gridProduto = new DataGridView();
+            GridProdId = new DataGridViewTextBoxColumn();
+            GridProdNome = new DataGridViewTextBoxColumn();
+            GridProdDesc = new DataGridViewTextBoxColumn();
+            GridProdPreco = new DataGridViewTextBoxColumn();
+            GridProdQuantidade = new DataGridViewTextBoxColumn();
+            GridProdCat = new DataGridViewTextBoxColumn();
             pnlPesquisa = new Panel();
             btnPesquisar = new Button();
             txtPesquisa = new TextBox();
             pnlAcao = new Panel();
             btnVisualizar = new Button();
-            btnNovo = new Button();
-            tpCidadeConsulta = new TabPage();
+            btnNovoProd = new Button();
+            tabProdutoConsulta = new TabPage();
             btnCancelar = new Button();
             pnlAcaoCadastro = new Panel();
             btnExcluir = new Button();
             btnSalvar = new Button();
             textBoxNomeProd = new TextBox();
             NameProdLbl = new Label();
-            tpCidadeCadastro = new TabPage();
+            tabProdutoCadastro = new TabPage();
             textBoxCatProd = new TextBox();
             CatProdLbl = new Label();
             textBoxQtdeProd = new TextBox();
@@ -51,28 +57,21 @@
             PrecoProdLbl = new Label();
             textBoxDescProd = new TextBox();
             DescProdLbl = new Label();
-            tabCidade = new TabControl();
-            GridProdID = new DataGridViewTextBoxColumn();
-            GridProdNome = new DataGridViewTextBoxColumn();
-            GridProdDesc = new DataGridViewTextBoxColumn();
-            GridProdPreco = new DataGridViewTextBoxColumn();
-            GridProdQuantidade = new DataGridViewTextBoxColumn();
-            GridProdCat = new DataGridViewTextBoxColumn();
+            tabProduto = new TabControl();
             ((System.ComponentModel.ISupportInitialize)gridProduto).BeginInit();
             pnlPesquisa.SuspendLayout();
             pnlAcao.SuspendLayout();
-            tpCidadeConsulta.SuspendLayout();
+            tabProdutoConsulta.SuspendLayout();
             pnlAcaoCadastro.SuspendLayout();
-            tpCidadeCadastro.SuspendLayout();
-            tabCidade.SuspendLayout();
+            tabProdutoCadastro.SuspendLayout();
+            tabProduto.SuspendLayout();
             SuspendLayout();
             // 
             // gridProduto
             // 
-            gridProduto.AllowUserToOrderColumns = true;
             gridProduto.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             gridProduto.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            gridProduto.Columns.AddRange(new DataGridViewColumn[] { GridProdID, GridProdNome, GridProdDesc, GridProdPreco, GridProdQuantidade, GridProdCat });
+            gridProduto.Columns.AddRange(new DataGridViewColumn[] { GridProdId, GridProdNome, GridProdDesc, GridProdPreco, GridProdQuantidade, GridProdCat });
             gridProduto.Dock = DockStyle.Fill;
             gridProduto.Location = new Point(3, 45);
             gridProduto.Margin = new Padding(3, 4, 3, 4);
@@ -81,6 +80,42 @@
             gridProduto.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             gridProduto.Size = new Size(889, 355);
             gridProduto.TabIndex = 7;
+            // 
+            // GridProdId
+            // 
+            GridProdId.HeaderText = "ID";
+            GridProdId.MinimumWidth = 6;
+            GridProdId.Name = "GridProdId";
+            // 
+            // GridProdNome
+            // 
+            GridProdNome.HeaderText = "Nome";
+            GridProdNome.MinimumWidth = 6;
+            GridProdNome.Name = "GridProdNome";
+            // 
+            // GridProdDesc
+            // 
+            GridProdDesc.HeaderText = "Descrição";
+            GridProdDesc.MinimumWidth = 6;
+            GridProdDesc.Name = "GridProdDesc";
+            // 
+            // GridProdPreco
+            // 
+            GridProdPreco.HeaderText = "Preco";
+            GridProdPreco.MinimumWidth = 6;
+            GridProdPreco.Name = "GridProdPreco";
+            // 
+            // GridProdQuantidade
+            // 
+            GridProdQuantidade.HeaderText = "Quantidade";
+            GridProdQuantidade.MinimumWidth = 6;
+            GridProdQuantidade.Name = "GridProdQuantidade";
+            // 
+            // GridProdCat
+            // 
+            GridProdCat.HeaderText = "Categoria";
+            GridProdCat.MinimumWidth = 6;
+            GridProdCat.Name = "GridProdCat";
             // 
             // pnlPesquisa
             // 
@@ -115,7 +150,7 @@
             // pnlAcao
             // 
             pnlAcao.Controls.Add(btnVisualizar);
-            pnlAcao.Controls.Add(btnNovo);
+            pnlAcao.Controls.Add(btnNovoProd);
             pnlAcao.Dock = DockStyle.Bottom;
             pnlAcao.Location = new Point(3, 400);
             pnlAcao.Margin = new Padding(3, 4, 3, 4);
@@ -132,30 +167,32 @@
             btnVisualizar.TabIndex = 0;
             btnVisualizar.Text = "Visualizar";
             btnVisualizar.UseVisualStyleBackColor = true;
+            btnVisualizar.Click += btnVisualizar_Click_1;
             // 
-            // btnNovo
+            // btnNovoProd
             // 
-            btnNovo.Location = new Point(794, 7);
-            btnNovo.Margin = new Padding(3, 4, 3, 4);
-            btnNovo.Name = "btnNovo";
-            btnNovo.Size = new Size(86, 31);
-            btnNovo.TabIndex = 1;
-            btnNovo.Text = "Novo";
-            btnNovo.UseVisualStyleBackColor = true;
+            btnNovoProd.Location = new Point(794, 7);
+            btnNovoProd.Margin = new Padding(3, 4, 3, 4);
+            btnNovoProd.Name = "btnNovoProd";
+            btnNovoProd.Size = new Size(86, 31);
+            btnNovoProd.TabIndex = 1;
+            btnNovoProd.Text = "Novo";
+            btnNovoProd.UseVisualStyleBackColor = true;
+            btnNovoProd.Click += btnNovoProd_Click;
             // 
-            // tpCidadeConsulta
+            // tabProdutoConsulta
             // 
-            tpCidadeConsulta.Controls.Add(gridProduto);
-            tpCidadeConsulta.Controls.Add(pnlAcao);
-            tpCidadeConsulta.Controls.Add(pnlPesquisa);
-            tpCidadeConsulta.Location = new Point(4, 29);
-            tpCidadeConsulta.Margin = new Padding(3, 4, 3, 4);
-            tpCidadeConsulta.Name = "tpCidadeConsulta";
-            tpCidadeConsulta.Padding = new Padding(3, 4, 3, 4);
-            tpCidadeConsulta.Size = new Size(895, 445);
-            tpCidadeConsulta.TabIndex = 0;
-            tpCidadeConsulta.Text = "Consulta";
-            tpCidadeConsulta.UseVisualStyleBackColor = true;
+            tabProdutoConsulta.Controls.Add(gridProduto);
+            tabProdutoConsulta.Controls.Add(pnlAcao);
+            tabProdutoConsulta.Controls.Add(pnlPesquisa);
+            tabProdutoConsulta.Location = new Point(4, 29);
+            tabProdutoConsulta.Margin = new Padding(3, 4, 3, 4);
+            tabProdutoConsulta.Name = "tabProdutoConsulta";
+            tabProdutoConsulta.Padding = new Padding(3, 4, 3, 4);
+            tabProdutoConsulta.Size = new Size(895, 445);
+            tabProdutoConsulta.TabIndex = 0;
+            tabProdutoConsulta.Text = "Consulta";
+            tabProdutoConsulta.UseVisualStyleBackColor = true;
             // 
             // btnCancelar
             // 
@@ -166,6 +203,7 @@
             btnCancelar.TabIndex = 1;
             btnCancelar.Text = "Cancelar";
             btnCancelar.UseVisualStyleBackColor = true;
+            btnCancelar.Click += btnCancelar_Click;
             // 
             // pnlAcaoCadastro
             // 
@@ -188,6 +226,7 @@
             btnExcluir.TabIndex = 2;
             btnExcluir.Text = "Excluir";
             btnExcluir.UseVisualStyleBackColor = true;
+            btnExcluir.Click += btnExcluir_Click;
             // 
             // btnSalvar
             // 
@@ -217,27 +256,27 @@
             NameProdLbl.TabIndex = 6;
             NameProdLbl.Text = "Nome Do Produto";
             // 
-            // tpCidadeCadastro
+            // tabProdutoCadastro
             // 
-            tpCidadeCadastro.Controls.Add(textBoxCatProd);
-            tpCidadeCadastro.Controls.Add(CatProdLbl);
-            tpCidadeCadastro.Controls.Add(textBoxQtdeProd);
-            tpCidadeCadastro.Controls.Add(QtdeProdLbl);
-            tpCidadeCadastro.Controls.Add(textBoxPrecoProd);
-            tpCidadeCadastro.Controls.Add(PrecoProdLbl);
-            tpCidadeCadastro.Controls.Add(textBoxDescProd);
-            tpCidadeCadastro.Controls.Add(DescProdLbl);
-            tpCidadeCadastro.Controls.Add(textBoxNomeProd);
-            tpCidadeCadastro.Controls.Add(NameProdLbl);
-            tpCidadeCadastro.Controls.Add(pnlAcaoCadastro);
-            tpCidadeCadastro.Location = new Point(4, 29);
-            tpCidadeCadastro.Margin = new Padding(3, 4, 3, 4);
-            tpCidadeCadastro.Name = "tpCidadeCadastro";
-            tpCidadeCadastro.Padding = new Padding(3, 4, 3, 4);
-            tpCidadeCadastro.Size = new Size(895, 445);
-            tpCidadeCadastro.TabIndex = 1;
-            tpCidadeCadastro.Text = "Cadastro";
-            tpCidadeCadastro.UseVisualStyleBackColor = true;
+            tabProdutoCadastro.Controls.Add(textBoxCatProd);
+            tabProdutoCadastro.Controls.Add(CatProdLbl);
+            tabProdutoCadastro.Controls.Add(textBoxQtdeProd);
+            tabProdutoCadastro.Controls.Add(QtdeProdLbl);
+            tabProdutoCadastro.Controls.Add(textBoxPrecoProd);
+            tabProdutoCadastro.Controls.Add(PrecoProdLbl);
+            tabProdutoCadastro.Controls.Add(textBoxDescProd);
+            tabProdutoCadastro.Controls.Add(DescProdLbl);
+            tabProdutoCadastro.Controls.Add(textBoxNomeProd);
+            tabProdutoCadastro.Controls.Add(NameProdLbl);
+            tabProdutoCadastro.Controls.Add(pnlAcaoCadastro);
+            tabProdutoCadastro.Location = new Point(4, 29);
+            tabProdutoCadastro.Margin = new Padding(3, 4, 3, 4);
+            tabProdutoCadastro.Name = "tabProdutoCadastro";
+            tabProdutoCadastro.Padding = new Padding(3, 4, 3, 4);
+            tabProdutoCadastro.Size = new Size(895, 445);
+            tabProdutoCadastro.TabIndex = 1;
+            tabProdutoCadastro.Text = "Cadastro";
+            tabProdutoCadastro.UseVisualStyleBackColor = true;
             // 
             // textBoxCatProd
             // 
@@ -307,71 +346,35 @@
             DescProdLbl.TabIndex = 10;
             DescProdLbl.Text = "Descrição do Produto";
             // 
-            // tabCidade
+            // tabProduto
             // 
-            tabCidade.Controls.Add(tpCidadeConsulta);
-            tabCidade.Controls.Add(tpCidadeCadastro);
-            tabCidade.Dock = DockStyle.Fill;
-            tabCidade.Location = new Point(0, 0);
-            tabCidade.Margin = new Padding(3, 4, 3, 4);
-            tabCidade.Name = "tabCidade";
-            tabCidade.SelectedIndex = 0;
-            tabCidade.Size = new Size(903, 478);
-            tabCidade.TabIndex = 2;
-            // 
-            // GridProdID
-            // 
-            GridProdID.HeaderText = "ID";
-            GridProdID.MinimumWidth = 6;
-            GridProdID.Name = "GridProdID";
-            // 
-            // GridProdNome
-            // 
-            GridProdNome.HeaderText = "Nome";
-            GridProdNome.MinimumWidth = 6;
-            GridProdNome.Name = "GridProdNome";
-            // 
-            // GridProdDesc
-            // 
-            GridProdDesc.HeaderText = "Descrição";
-            GridProdDesc.MinimumWidth = 6;
-            GridProdDesc.Name = "GridProdDesc";
-            // 
-            // GridProdPreco
-            // 
-            GridProdPreco.HeaderText = "Preco";
-            GridProdPreco.MinimumWidth = 6;
-            GridProdPreco.Name = "GridProdPreco";
-            // 
-            // GridProdQuantidade
-            // 
-            GridProdQuantidade.HeaderText = "Quantidade";
-            GridProdQuantidade.MinimumWidth = 6;
-            GridProdQuantidade.Name = "GridProdQuantidade";
-            // 
-            // GridProdCat
-            // 
-            GridProdCat.HeaderText = "Categoria";
-            GridProdCat.MinimumWidth = 6;
-            GridProdCat.Name = "GridProdCat";
+            tabProduto.Controls.Add(tabProdutoConsulta);
+            tabProduto.Controls.Add(tabProdutoCadastro);
+            tabProduto.Dock = DockStyle.Fill;
+            tabProduto.Location = new Point(0, 0);
+            tabProduto.Margin = new Padding(3, 4, 3, 4);
+            tabProduto.Name = "tabProduto";
+            tabProduto.SelectedIndex = 0;
+            tabProduto.Size = new Size(903, 478);
+            tabProduto.TabIndex = 2;
             // 
             // ProdutoForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(903, 478);
-            Controls.Add(tabCidade);
+            Controls.Add(tabProduto);
             Name = "ProdutoForm";
             Text = "ProdutoForm";
             ((System.ComponentModel.ISupportInitialize)gridProduto).EndInit();
             pnlPesquisa.ResumeLayout(false);
             pnlPesquisa.PerformLayout();
             pnlAcao.ResumeLayout(false);
-            tpCidadeConsulta.ResumeLayout(false);
+            tabProdutoConsulta.ResumeLayout(false);
             pnlAcaoCadastro.ResumeLayout(false);
-            tpCidadeCadastro.ResumeLayout(false);
-            tpCidadeCadastro.PerformLayout();
-            tabCidade.ResumeLayout(false);
+            tabProdutoCadastro.ResumeLayout(false);
+            tabProdutoCadastro.PerformLayout();
+            tabProduto.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -383,16 +386,16 @@
         private TextBox txtPesquisa;
         private Panel pnlAcao;
         private Button btnVisualizar;
-        private Button btnNovo;
-        private TabPage tpCidadeConsulta;
+        private Button btnNovoProd;
+        private TabPage tabProdutoConsulta;
         private Button btnCancelar;
         private Panel pnlAcaoCadastro;
         private Button btnExcluir;
         private Button btnSalvar;
         private TextBox textBoxNomeProd;
         private Label NameProdLbl;
-        private TabPage tpCidadeCadastro;
-        private TabControl tabCidade;
+        private TabPage tabProdutoCadastro;
+        private TabControl tabProduto;
         private TextBox textBoxPrecoProd;
         private Label PrecoProdLbl;
         private TextBox textBoxDescProd;
@@ -401,7 +404,7 @@
         private Label QtdeProdLbl;
         private TextBox textBoxCatProd;
         private Label CatProdLbl;
-        private DataGridViewTextBoxColumn GridProdID;
+        private DataGridViewTextBoxColumn GridProdId;
         private DataGridViewTextBoxColumn GridProdNome;
         private DataGridViewTextBoxColumn GridProdDesc;
         private DataGridViewTextBoxColumn GridProdPreco;

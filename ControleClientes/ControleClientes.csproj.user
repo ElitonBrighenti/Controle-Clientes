@@ -2,19 +2,19 @@
 <Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup />
   <ItemGroup>
-    <Compile Update="CidadeForm.cs">
+    <Compile Update="Forms\CidadeForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="ClienteForm.cs">
+    <Compile Update="Forms\ClienteForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="MenuForm.cs">
+    <Compile Update="Forms\MenuForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="PedidoForm.cs">
+    <Compile Update="Forms\PedidoForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="ProdutoForm.cs">
+    <Compile Update="Forms\ProdutoForm.cs">
       <SubType>Form</SubType>
     </Compile>
   </ItemGroup>

@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace ControleClientes
+namespace ControleClientes.Entidades
 {
     public class Endereco
     {
@@ -52,6 +52,6 @@ namespace ControleClientes
         public Cidade Cidade { get; set; }
 
         [JsonPropertyName("cidadeid")]
-        public int CidadeId { get; set; } 
+        public int CidadeId { get; set; }
     }
 }

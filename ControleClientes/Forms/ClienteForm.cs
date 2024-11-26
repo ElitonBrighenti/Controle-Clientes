@@ -1,4 +1,6 @@
 using System.Text.Json;
+using ControleClientes.Entidades;
+using ControleClientes.Repository;
 
 namespace ControleClientes
 {
@@ -242,21 +244,6 @@ namespace ControleClientes
             {
                 MessageBox.Show(ex.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-        }
-
-        private void ClienteForm_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void gridCliente_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
-        private void txtNome_TextChanged(object sender, EventArgs e)
-        {
-
         }
     }
 }
