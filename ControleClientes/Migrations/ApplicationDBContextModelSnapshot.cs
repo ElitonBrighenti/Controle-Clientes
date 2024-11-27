@@ -22,7 +22,7 @@ namespace ControleClientes.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("ControleClientes.Cidade", b =>
+            modelBuilder.Entity("ControleClientes.Entidades.Cidade", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -45,7 +45,7 @@ namespace ControleClientes.Migrations
                     b.HasAnnotation("Relational:JsonPropertyName", "cidade");
                 });
 
-            modelBuilder.Entity("ControleClientes.Cliente", b =>
+            modelBuilder.Entity("ControleClientes.Entidades.Cliente", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -77,7 +77,7 @@ namespace ControleClientes.Migrations
                     b.ToTable("Clientes");
                 });
 
-            modelBuilder.Entity("ControleClientes.Endereco", b =>
+            modelBuilder.Entity("ControleClientes.Entidades.Endereco", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -165,7 +165,7 @@ namespace ControleClientes.Migrations
                     b.ToTable("Enderecos");
                 });
 
-            modelBuilder.Entity("ControleClientes.Item", b =>
+            modelBuilder.Entity("ControleClientes.Entidades.Item", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -185,9 +185,6 @@ namespace ControleClientes.Migrations
                     b.Property<int>("Quantidade")
                         .HasColumnType("integer");
 
-                    b.Property<decimal>("Total")
-                        .HasColumnType("numeric");
-
                     b.HasKey("Id");
 
                     b.HasIndex("PedidoId");
@@ -197,13 +194,13 @@ namespace ControleClientes.Migrations
                     b.ToTable("Itens");
                 });
 
-            modelBuilder.Entity("ControleClientes.Pedido", b =>
+            modelBuilder.Entity("ControleClientes.Entidades.Pedido", b =>
                 {
-                    b.Property<int>("PedidoId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("PedidoId"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<int>("ClienteId")
                         .HasColumnType("integer");
@@ -215,17 +212,14 @@ namespace ControleClientes.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<decimal>("Total")
-                        .HasColumnType("numeric");
-
-                    b.HasKey("PedidoId");
+                    b.HasKey("Id");
 
                     b.HasIndex("ClienteId");
 
                     b.ToTable("Pedidos");
                 });
 
-            modelBuilder.Entity("ControleClientes.Produto", b =>
+            modelBuilder.Entity("ControleClientes.Entidades.Produto", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -256,9 +250,9 @@ namespace ControleClientes.Migrations
                     b.ToTable("Produtos");
                 });
 
-            modelBuilder.Entity("ControleClientes.Cliente", b =>
+            modelBuilder.Entity("ControleClientes.Entidades.Cliente", b =>
                 {
-                    b.HasOne("ControleClientes.Endereco", "Endereco")
+                    b.HasOne("ControleClientes.Entidades.Endereco", "Endereco")
                         .WithMany()
                         .HasForeignKey("EnderecoId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -267,9 +261,9 @@ namespace ControleClientes.Migrations
                     b.Navigation("Endereco");
                 });
 
-            modelBuilder.Entity("ControleClientes.Endereco", b =>
+            modelBuilder.Entity("ControleClientes.Entidades.Endereco", b =>
                 {
-                    b.HasOne("ControleClientes.Cidade", "Cidade")
+                    b.HasOne("ControleClientes.Entidades.Cidade", "Cidade")
                         .WithMany()
                         .HasForeignKey("CidadeId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -278,16 +272,16 @@ namespace ControleClientes.Migrations
                     b.Navigation("Cidade");
                 });
 
-            modelBuilder.Entity("ControleClientes.Item", b =>
+            modelBuilder.Entity("ControleClientes.Entidades.Item", b =>
                 {
-                    b.HasOne("ControleClientes.Pedido", "Pedido")
+                    b.HasOne("ControleClientes.Entidades.Pedido", "Pedido")
                         .WithMany("Itens")
                         .HasForeignKey("PedidoId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("ControleClientes.Produto", "Produto")
-                        .WithMany()
+                    b.HasOne("ControleClientes.Entidades.Produto", "Produto")
+                        .WithMany("Itens")
                         .HasForeignKey("ProdutoId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -297,9 +291,9 @@ namespace ControleClientes.Migrations
                     b.Navigation("Produto");
                 });
 
-            modelBuilder.Entity("ControleClientes.Pedido", b =>
+            modelBuilder.Entity("ControleClientes.Entidades.Pedido", b =>
                 {
-                    b.HasOne("ControleClientes.Cliente", "Cliente")
+                    b.HasOne("ControleClientes.Entidades.Cliente", "Cliente")
                         .WithMany()
                         .HasForeignKey("ClienteId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -308,7 +302,12 @@ namespace ControleClientes.Migrations
                     b.Navigation("Cliente");
                 });
 
-            modelBuilder.Entity("ControleClientes.Pedido", b =>
+            modelBuilder.Entity("ControleClientes.Entidades.Pedido", b =>
+                {
+                    b.Navigation("Itens");
+                });
+
+            modelBuilder.Entity("ControleClientes.Entidades.Produto", b =>
                 {
                     b.Navigation("Itens");
                 });

@@ -8,13 +8,12 @@ namespace ControleClientes.Entidades
 {
     public class Pedido
     {
-        public int PedidoId { get; set; }
-        public int ClienteId { get; set; }
-        public Cliente Cliente { get; set; }
-        public DateTime DataPedido { get; set; } = DateTime.Now;
-        public string Status { get; set; } = "Pendente";
-        public decimal Total { get; set; }
-        public List<Item> Itens { get; set; } = new List<Item>();
+        public int Id { get; set; }
+        public DateTime DataPedido { get; set; }
+        public int ClienteId { get; set; }  // Chave estrangeira para Cliente
+        public Cliente Cliente { get; set; }  // Navegação de relacionamento com Cliente
+        public string Status { get; set; }
+        public ICollection<Item> Itens { get; set; } = new List<Item>(); // Lista de itens do pedido
 
     }
 }

@@ -14,5 +14,6 @@ namespace ControleClientes.Entidades
         public decimal Preco { get; set; }
         public int QuantidadeEstoque { get; set; }
         public string Categoria { get; set; }
+        public List<Item> Itens { get; set; }
     }
 }

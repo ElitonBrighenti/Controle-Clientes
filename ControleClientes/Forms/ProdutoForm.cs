@@ -121,7 +121,6 @@ namespace ControleClientes
             tabProduto.SelectTab(tabProdutoConsulta);
         }
 
-
         private void btnExcluir_Click(object sender, EventArgs e)
         {
             ExcluirProduto();
