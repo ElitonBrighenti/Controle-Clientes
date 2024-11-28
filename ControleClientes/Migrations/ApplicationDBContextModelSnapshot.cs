@@ -40,7 +40,7 @@ namespace ControleClientes.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Cidades");
+                    b.ToTable("Cidades", (string)null);
 
                     b.HasAnnotation("Relational:JsonPropertyName", "cidade");
                 });
@@ -74,7 +74,7 @@ namespace ControleClientes.Migrations
 
                     b.HasIndex("EnderecoId");
 
-                    b.ToTable("Clientes");
+                    b.ToTable("Clientes", (string)null);
                 });
 
             modelBuilder.Entity("ControleClientes.Entidades.Endereco", b =>
@@ -162,7 +162,7 @@ namespace ControleClientes.Migrations
 
                     b.HasIndex("CidadeId");
 
-                    b.ToTable("Enderecos");
+                    b.ToTable("Enderecos", (string)null);
                 });
 
             modelBuilder.Entity("ControleClientes.Entidades.Item", b =>
@@ -176,22 +176,15 @@ namespace ControleClientes.Migrations
                     b.Property<int>("PedidoId")
                         .HasColumnType("integer");
 
-                    b.Property<decimal>("PrecoUnitario")
-                        .HasColumnType("numeric");
-
-                    b.Property<int>("ProdutoId")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("Quantidade")
-                        .HasColumnType("integer");
+                    b.Property<int[]>("Quantidades")
+                        .IsRequired()
+                        .HasColumnType("integer[]");
 
                     b.HasKey("Id");
 
                     b.HasIndex("PedidoId");
 
-                    b.HasIndex("ProdutoId");
-
-                    b.ToTable("Itens");
+                    b.ToTable("Itens", (string)null);
                 });
 
             modelBuilder.Entity("ControleClientes.Entidades.Pedido", b =>
@@ -216,7 +209,7 @@ namespace ControleClientes.Migrations
 
                     b.HasIndex("ClienteId");
 
-                    b.ToTable("Pedidos");
+                    b.ToTable("Pedidos", (string)null);
                 });
 
             modelBuilder.Entity("ControleClientes.Entidades.Produto", b =>
@@ -235,6 +228,9 @@ namespace ControleClientes.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<int?>("ItemId")
+                        .HasColumnType("integer");
+
                     b.Property<string>("Nome")
                         .IsRequired()
                         .HasColumnType("text");
@@ -247,7 +243,9 @@ namespace ControleClientes.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Produtos");
+                    b.HasIndex("ItemId");
+
+                    b.ToTable("Produtos", (string)null);
                 });
 
             modelBuilder.Entity("ControleClientes.Entidades.Cliente", b =>
@@ -280,15 +278,7 @@ namespace ControleClientes.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("ControleClientes.Entidades.Produto", "Produto")
-                        .WithMany("Itens")
-                        .HasForeignKey("ProdutoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.Navigation("Pedido");
-
-                    b.Navigation("Produto");
                 });
 
             modelBuilder.Entity("ControleClientes.Entidades.Pedido", b =>
@@ -302,12 +292,19 @@ namespace ControleClientes.Migrations
                     b.Navigation("Cliente");
                 });
 
-            modelBuilder.Entity("ControleClientes.Entidades.Pedido", b =>
+            modelBuilder.Entity("ControleClientes.Entidades.Produto", b =>
                 {
-                    b.Navigation("Itens");
+                    b.HasOne("ControleClientes.Entidades.Item", null)
+                        .WithMany("Produtos")
+                        .HasForeignKey("ItemId");
                 });
 
-            modelBuilder.Entity("ControleClientes.Entidades.Produto", b =>
+            modelBuilder.Entity("ControleClientes.Entidades.Item", b =>
+                {
+                    b.Navigation("Produtos");
+                });
+
+            modelBuilder.Entity("ControleClientes.Entidades.Pedido", b =>
                 {
                     b.Navigation("Itens");
                 });

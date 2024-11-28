@@ -23,11 +23,6 @@ namespace ControleClientes.Repository
             _context.SaveChanges();
         }
 
-        public List<Item> GetAll()
-        {
-            return _context.Itens.Include(i => i.Produto).ToList();
-        }
-
         public void Update(Item item)
         {
             _context.Itens.Update(item);

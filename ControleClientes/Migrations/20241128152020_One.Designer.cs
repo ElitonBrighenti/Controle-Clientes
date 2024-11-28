@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace ControleClientes.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    [Migration("20241127183751_first")]
-    partial class first
+    [Migration("20241128152020_One")]
+    partial class One
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -179,20 +179,13 @@ namespace ControleClientes.Migrations
                     b.Property<int>("PedidoId")
                         .HasColumnType("integer");
 
-                    b.Property<decimal>("PrecoUnitario")
-                        .HasColumnType("numeric");
-
-                    b.Property<int>("ProdutoId")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("Quantidade")
-                        .HasColumnType("integer");
+                    b.Property<int[]>("Quantidades")
+                        .IsRequired()
+                        .HasColumnType("integer[]");
 
                     b.HasKey("Id");
 
                     b.HasIndex("PedidoId");
-
-                    b.HasIndex("ProdutoId");
 
                     b.ToTable("Itens");
                 });
@@ -238,6 +231,9 @@ namespace ControleClientes.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<int?>("ItemId")
+                        .HasColumnType("integer");
+
                     b.Property<string>("Nome")
                         .IsRequired()
                         .HasColumnType("text");
@@ -249,6 +245,8 @@ namespace ControleClientes.Migrations
                         .HasColumnType("integer");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ItemId");
 
                     b.ToTable("Produtos");
                 });
@@ -283,15 +281,7 @@ namespace ControleClientes.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("ControleClientes.Entidades.Produto", "Produto")
-                        .WithMany("Itens")
-                        .HasForeignKey("ProdutoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.Navigation("Pedido");
-
-                    b.Navigation("Produto");
                 });
 
             modelBuilder.Entity("ControleClientes.Entidades.Pedido", b =>
@@ -305,12 +295,19 @@ namespace ControleClientes.Migrations
                     b.Navigation("Cliente");
                 });
 
-            modelBuilder.Entity("ControleClientes.Entidades.Pedido", b =>
+            modelBuilder.Entity("ControleClientes.Entidades.Produto", b =>
                 {
-                    b.Navigation("Itens");
+                    b.HasOne("ControleClientes.Entidades.Item", null)
+                        .WithMany("Produtos")
+                        .HasForeignKey("ItemId");
                 });
 
-            modelBuilder.Entity("ControleClientes.Entidades.Produto", b =>
+            modelBuilder.Entity("ControleClientes.Entidades.Item", b =>
+                {
+                    b.Navigation("Produtos");
+                });
+
+            modelBuilder.Entity("ControleClientes.Entidades.Pedido", b =>
                 {
                     b.Navigation("Itens");
                 });

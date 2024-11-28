@@ -366,6 +366,7 @@
             Controls.Add(tabProduto);
             Name = "ProdutoForm";
             Text = "ProdutoForm";
+            Load += ProdutoForm_Load;
             ((System.ComponentModel.ISupportInitialize)gridProduto).EndInit();
             pnlPesquisa.ResumeLayout(false);
             pnlPesquisa.PerformLayout();

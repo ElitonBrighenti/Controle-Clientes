@@ -36,11 +36,9 @@
             tabPedidoConsulta = new TabPage();
             gridPedidos = new DataGridView();
             GridProdId = new DataGridViewTextBoxColumn();
-            GridProdNome = new DataGridViewTextBoxColumn();
             GridProdDesc = new DataGridViewTextBoxColumn();
+            GridProdNome = new DataGridViewTextBoxColumn();
             GridProdPreco = new DataGridViewTextBoxColumn();
-            GridProdQuantidade = new DataGridViewTextBoxColumn();
-            GridProdCat = new DataGridViewTextBoxColumn();
             pnlAcao = new Panel();
             btnVisualizar = new Button();
             btnNovoProd = new Button();
@@ -85,7 +83,7 @@
             btnSalvarPedido.TabIndex = 0;
             btnSalvarPedido.Text = "Salvar";
             btnSalvarPedido.UseVisualStyleBackColor = true;
-            btnSalvarPedido.Click += btnSalvarPedido_Click_1;
+            btnSalvarPedido.Click += btnSalvarPedido_Click;
             // 
             // pnlAcaoPedido
             // 
@@ -118,7 +116,7 @@
             btnCancelarPedido.TabIndex = 1;
             btnCancelarPedido.Text = "Cancelar";
             btnCancelarPedido.UseVisualStyleBackColor = true;
-            btnCancelarPedido.Click += btnCancelarPedido_Click_1;
+            btnCancelarPedido.Click += btnCancelarPedido_Click;
             // 
             // tabPedidoConsulta
             // 
@@ -138,7 +136,7 @@
             // 
             gridPedidos.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             gridPedidos.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            gridPedidos.Columns.AddRange(new DataGridViewColumn[] { GridProdId, GridProdNome, GridProdDesc, GridProdPreco, GridProdQuantidade, GridProdCat });
+            gridPedidos.Columns.AddRange(new DataGridViewColumn[] { GridProdId, GridProdDesc, GridProdNome, GridProdPreco });
             gridPedidos.Dock = DockStyle.Fill;
             gridPedidos.Location = new Point(3, 45);
             gridPedidos.Margin = new Padding(3, 4, 3, 4);
@@ -154,35 +152,23 @@
             GridProdId.MinimumWidth = 6;
             GridProdId.Name = "GridProdId";
             // 
-            // GridProdNome
-            // 
-            GridProdNome.HeaderText = "Nome";
-            GridProdNome.MinimumWidth = 6;
-            GridProdNome.Name = "GridProdNome";
-            // 
             // GridProdDesc
             // 
-            GridProdDesc.HeaderText = "Descrição";
+            GridProdDesc.HeaderText = "Cliente";
             GridProdDesc.MinimumWidth = 6;
             GridProdDesc.Name = "GridProdDesc";
             // 
+            // GridProdNome
+            // 
+            GridProdNome.HeaderText = "Data Pedido";
+            GridProdNome.MinimumWidth = 6;
+            GridProdNome.Name = "GridProdNome";
+            // 
             // GridProdPreco
             // 
-            GridProdPreco.HeaderText = "Preco";
+            GridProdPreco.HeaderText = "Status";
             GridProdPreco.MinimumWidth = 6;
             GridProdPreco.Name = "GridProdPreco";
-            // 
-            // GridProdQuantidade
-            // 
-            GridProdQuantidade.HeaderText = "Quantidade";
-            GridProdQuantidade.MinimumWidth = 6;
-            GridProdQuantidade.Name = "GridProdQuantidade";
-            // 
-            // GridProdCat
-            // 
-            GridProdCat.HeaderText = "Categoria";
-            GridProdCat.MinimumWidth = 6;
-            GridProdCat.Name = "GridProdCat";
             // 
             // pnlAcao
             // 
@@ -204,7 +190,7 @@
             btnVisualizar.TabIndex = 0;
             btnVisualizar.Text = "Visualizar";
             btnVisualizar.UseVisualStyleBackColor = true;
-            btnVisualizar.Click += btnVisualizar_Click;
+            btnVisualizar.Click += btnVisualizar_Click_1;
             // 
             // btnNovoProd
             // 
@@ -413,7 +399,6 @@
             Controls.Add(tabPedido);
             Name = "PedidoForm";
             Text = "PedidoForm";
-            Load += PedidoForm_Load;
             pnlAcaoPedido.ResumeLayout(false);
             tabPedidoConsulta.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)gridPedidos).EndInit();
@@ -440,12 +425,6 @@
         private TextBox textBoxDescProd;
         private TabPage tabProdutoConsulta;
         private DataGridView gridPedidos;
-        private DataGridViewTextBoxColumn GridProdId;
-        private DataGridViewTextBoxColumn GridProdNome;
-        private DataGridViewTextBoxColumn GridProdDesc;
-        private DataGridViewTextBoxColumn GridProdPreco;
-        private DataGridViewTextBoxColumn GridProdQuantidade;
-        private DataGridViewTextBoxColumn GridProdCat;
         private Panel pnlAcao;
         private Button btnVisualizar;
         private Button btnNovoProd;
@@ -471,5 +450,9 @@
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
+        private DataGridViewTextBoxColumn GridProdId;
+        private DataGridViewTextBoxColumn GridProdDesc;
+        private DataGridViewTextBoxColumn GridProdNome;
+        private DataGridViewTextBoxColumn GridProdPreco;
     }
 }

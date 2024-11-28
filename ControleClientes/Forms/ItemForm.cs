@@ -8,76 +8,104 @@ namespace ControleClientes.Forms
 {
     public partial class ItemForm : Form
     {
-        public static List<Produto> ProdutosDisponiveis { get; set; }
+        private readonly ItemRepository _itemRepository;
+        private readonly ProdutoRepository _produtoRepository;
+        private Pedido _pedido = null;
 
+        // Listas para armazenar os produtos e as quantidades no item
+        private List<Produto> _produtosNoItem = new List<Produto>();
+        private List<int> _quantidadesNoItem = new List<int>();
 
-        private ProdutoRepository _produtoRepository;
-        private Produto produtoSelecionado;
-        public Item ItemSelecionado { get; set; }
-
-        // Construtor
-        //public ItemForm(IQueryable<Produto> produtos)
-        //{
-        //    InitializeComponent();
-        //    _produtoRepository = new ProdutoRepository(new ApplicationDBContext());
-        //    cmbBoxProduto.DataSource = produtos.ToList();  // Passa a lista de produtos para o comboBox
-        //    cmbBoxProduto.DisplayMember = "Nome";
-        //    cmbBoxProduto.ValueMember = "Id";
-        //}
-        public ItemForm()
+        public ItemForm(Pedido pedido)
         {
             InitializeComponent();
-            // A lista de produtos pode ser acessada diretamente de ProdutosDisponiveis
-            cmbBoxProduto.DataSource = ProdutosDisponiveis;
-            cmbBoxProduto.DisplayMember = "Nome";  // Exibe o nome do produto no comboBox
-            cmbBoxProduto.ValueMember = "Id";  // Usa o ID do produto como valor para o banco
+            _itemRepository = new ItemRepository(new ApplicationDBContext());
+            _produtoRepository = new ProdutoRepository(new ApplicationDBContext());
+            _pedido = pedido;
+            CarregarProdutos();
         }
 
-
-        private void btnCancelarPedido_Click(object sender, EventArgs e)
+        private void CarregarProdutos()
         {
-            this.Close();  // Fecha o ItemForm sem salvar
+            cmbBoxProduto.DataSource = _produtoRepository.ReadAll();
+            cmbBoxProduto.DisplayMember = "Nome";
+            cmbBoxProduto.ValueMember = "Id";
         }
 
-        private void btnSalvarItem_Click_1(object sender, EventArgs e)
+        // Cancelar e fechar o form
+        private void btnCancelar_Click(object sender, EventArgs e)
         {
-            //if (cmbBoxProduto.SelectedIndex == -1 || string.IsNullOrWhiteSpace(txtQuantidade.Text))
-            //{
-            //    MessageBox.Show("Por favor, selecione um produto e informe a quantidade.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            //    return;
-            //}
+            this.Close();
+        }
 
-            //// Cria o item com base nos dados preenchidos
-            //produtoSelecionado = (Produto)cmbBoxProduto.SelectedItem;
-            //var quantidade = int.Parse(txtQuantidade.Text);
-            //var precoUnitario = produtoSelecionado.Preco;  // Preço do produto
-            //var item = new Item
-            //{
-            //    ProdutoId = produtoSelecionado.Id,
-            //    Quantidade = quantidade,
-            //    PrecoUnitario = precoUnitario
-            //};
-
+        private void btnAddProduto_Click(object sender, EventArgs e)
+        {
             // Verifica se o produto foi selecionado
-            var produtoSelecionado = cmbBoxProduto.SelectedItem as Produto;
-            if (produtoSelecionado == null)
+            if (cmbBoxProduto.SelectedItem == null)
             {
-                MessageBox.Show("Selecione um produto válido.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Selecione um produto.");
                 return;
             }
 
-            // Criação do item
+            var produtoSelecionado = (Produto)cmbBoxProduto.SelectedItem;
+
+            // Verifica se a quantidade foi informada corretamente
+            if (int.TryParse(numericUpDownQuantidade.Text, out int quantidadeSelecionada) && quantidadeSelecionada > 0)
+            {
+                // Adiciona o produto e a quantidade às listas
+                _produtosNoItem.Add(produtoSelecionado);
+                _quantidadesNoItem.Add(quantidadeSelecionada);
+
+                // Atualiza a interface para exibir os produtos e quantidades
+                ///AtualizarListaProdutosQuantidades();
+            }
+            else
+            {
+                MessageBox.Show("Informe uma quantidade válida.");
+            }
+
+            // Atualizar a exibição dos itens na grid
+            //AtualizarGridItens();
+        }
+
+        private void btnSalvarItem_Click(object sender, EventArgs e)
+        {
+            // Verifica se o pedido foi selecionado
+            if (_pedido == null)
+            {
+                MessageBox.Show("Selecione um pedido para adicionar o item.");
+                return;
+            }
+
+            // Verifica se a lista de produtos e quantidades não está vazia
+            if (_produtosNoItem.Count == 0 || _quantidadesNoItem.Count == 0)
+            {
+                MessageBox.Show("Adicione produtos ao item antes de salvar.");
+                return;
+            }
+
+            // Criar o novo item para o pedido
             var item = new Item
             {
-                Produto = produtoSelecionado,  // Atribui o produto ao item
-                Quantidade = Convert.ToInt32(txtQuantidade.Text),  // Obtém a quantidade do textbox
-                PrecoUnitario = produtoSelecionado.Preco,  // Supondo que o preço esteja no produto
+                PedidoId = _pedido.Id,  // Associando o item ao pedido existente
+                Produtos = _produtosNoItem,  // Associando os produtos ao item
+                Quantidades = _quantidadesNoItem  // Associando as quantidades aos produtos
             };
 
-            ItemSelecionado = item;  // Atribui o item à propriedade
+            // Salvar o item no banco de dados
+            _itemRepository.Create(item);
 
-            this.DialogResult = DialogResult.OK;  // Retorna OK para o PedidoForm
-            this.Close();  // Fecha o ItemForm
+            // Adicionar o item ao pedido
+            _pedido.Itens.Add(item);  // Isso é opcional, pois o item já está salvo no banco
+
+            // Exibir a mensagem de sucesso
+            MessageBox.Show("Item salvo com sucesso!");
+
+            // Limpar os dados das listas e atualizar a interface
+            _produtosNoItem.Clear();
+            _quantidadesNoItem.Clear();
+            //AtualizarListaProdutosQuantidades();  // Atualizar a interface para refletir a mudança
+
         }
     }
 }

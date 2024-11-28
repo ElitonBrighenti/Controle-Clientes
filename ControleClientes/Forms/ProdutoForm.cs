@@ -160,7 +160,10 @@ namespace ControleClientes
             textBoxCatProd.Clear();
         }
 
+        private void ProdutoForm_Load(object sender, EventArgs e)
+        {
 
+        }
     }
 
 }

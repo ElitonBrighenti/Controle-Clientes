@@ -16,20 +16,23 @@ namespace ControleClientes.Repository
         {
             _context = context;
         }
-
+        public List<Pedido> ReadAll()
+        {
+            return _context.Pedidos.ToList();
+        }
         public void Create(Pedido pedido)
         {
             _context.Pedidos.Add(pedido);
             _context.SaveChanges();
         }
 
-        public Pedido GetById(int id)
-        {
-            return _context.Pedidos
-                .Include(p => p.Itens)
-                .ThenInclude(i => i.Produto)
-                .FirstOrDefault(p => p.Id == id);
-        }
+        //public Pedido GetById(int id)
+        //{
+        //    return _context.Pedidos
+        //        .Include(p => p.Id)
+        //        .ThenInclude(i => i.Produto)
+        //        .FirstOrDefault(p => p.Id == id);
+        //}
 
         public List<Pedido> GetAll()
         {
@@ -44,12 +47,12 @@ namespace ControleClientes.Repository
 
         public void Delete(int id)
         {
-            var pedido = GetById(id);
-            if (pedido != null)
-            {
-                _context.Pedidos.Remove(pedido);
-                _context.SaveChanges();
-            }
+            //var pedido = GetById(id);
+            //if (pedido != null)
+            //{
+            //    _context.Pedidos.Remove(pedido);
+            //    _context.SaveChanges();
+            //}
         }
     }
 }

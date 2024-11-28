@@ -20,6 +20,25 @@ namespace ControleClientes
         {
             optionsBuilder.UseNpgsql("server=localhost;username=postgres;database=clientes;Password=2024");
         }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            // Configurar relacionamento muitos-para-muitos entre Item e Produto
+            modelBuilder.Entity<Item>()
+                .HasMany(i => i.Produtos)
+                .WithMany()
+                .UsingEntity(j => j.ToTable("ItemProdutos")); // Define o nome da tabela de junção
+
+            // Configurar chave composta para a tabela de junção, se necessário
+            modelBuilder.Entity<Item>()
+                .Navigation(i => i.Produtos)
+                .AutoInclude(); // Opcional: Carregar produtos automaticamente ao buscar itens
+
+            // Outras configurações de entidades
+            base.OnModelCreating(modelBuilder);
+        }
+
+
+
     }
 }
 
