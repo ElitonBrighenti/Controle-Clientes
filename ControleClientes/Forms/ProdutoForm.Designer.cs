@@ -29,12 +29,6 @@
         private void InitializeComponent()
         {
             gridProduto = new DataGridView();
-            GridProdId = new DataGridViewTextBoxColumn();
-            GridProdNome = new DataGridViewTextBoxColumn();
-            GridProdDesc = new DataGridViewTextBoxColumn();
-            GridProdPreco = new DataGridViewTextBoxColumn();
-            GridProdQuantidade = new DataGridViewTextBoxColumn();
-            GridProdCat = new DataGridViewTextBoxColumn();
             pnlPesquisa = new Panel();
             btnPesquisar = new Button();
             txtPesquisa = new TextBox();
@@ -58,6 +52,12 @@
             textBoxDescProd = new TextBox();
             DescProdLbl = new Label();
             tabProduto = new TabControl();
+            GridProdCat = new DataGridViewTextBoxColumn();
+            GridProdQuantidade = new DataGridViewTextBoxColumn();
+            GridProdPreco = new DataGridViewTextBoxColumn();
+            GridProdDesc = new DataGridViewTextBoxColumn();
+            GridProdNome = new DataGridViewTextBoxColumn();
+            GridProdId = new DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)gridProduto).BeginInit();
             pnlPesquisa.SuspendLayout();
             pnlAcao.SuspendLayout();
@@ -80,42 +80,6 @@
             gridProduto.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             gridProduto.Size = new Size(889, 355);
             gridProduto.TabIndex = 7;
-            // 
-            // GridProdId
-            // 
-            GridProdId.HeaderText = "ID";
-            GridProdId.MinimumWidth = 6;
-            GridProdId.Name = "GridProdId";
-            // 
-            // GridProdNome
-            // 
-            GridProdNome.HeaderText = "Nome";
-            GridProdNome.MinimumWidth = 6;
-            GridProdNome.Name = "GridProdNome";
-            // 
-            // GridProdDesc
-            // 
-            GridProdDesc.HeaderText = "Descrição";
-            GridProdDesc.MinimumWidth = 6;
-            GridProdDesc.Name = "GridProdDesc";
-            // 
-            // GridProdPreco
-            // 
-            GridProdPreco.HeaderText = "Preco";
-            GridProdPreco.MinimumWidth = 6;
-            GridProdPreco.Name = "GridProdPreco";
-            // 
-            // GridProdQuantidade
-            // 
-            GridProdQuantidade.HeaderText = "Quantidade";
-            GridProdQuantidade.MinimumWidth = 6;
-            GridProdQuantidade.Name = "GridProdQuantidade";
-            // 
-            // GridProdCat
-            // 
-            GridProdCat.HeaderText = "Categoria";
-            GridProdCat.MinimumWidth = 6;
-            GridProdCat.Name = "GridProdCat";
             // 
             // pnlPesquisa
             // 
@@ -357,6 +321,42 @@
             tabProduto.SelectedIndex = 0;
             tabProduto.Size = new Size(903, 478);
             tabProduto.TabIndex = 2;
+            // 
+            // GridProdCat
+            // 
+            GridProdCat.HeaderText = "Categoria";
+            GridProdCat.MinimumWidth = 6;
+            GridProdCat.Name = "GridProdCat";
+            // 
+            // GridProdQuantidade
+            // 
+            GridProdQuantidade.HeaderText = "Quantidade";
+            GridProdQuantidade.MinimumWidth = 6;
+            GridProdQuantidade.Name = "GridProdQuantidade";
+            // 
+            // GridProdPreco
+            // 
+            GridProdPreco.HeaderText = "Preco";
+            GridProdPreco.MinimumWidth = 6;
+            GridProdPreco.Name = "GridProdPreco";
+            // 
+            // GridProdDesc
+            // 
+            GridProdDesc.HeaderText = "Descrição";
+            GridProdDesc.MinimumWidth = 6;
+            GridProdDesc.Name = "GridProdDesc";
+            // 
+            // GridProdNome
+            // 
+            GridProdNome.HeaderText = "Nome";
+            GridProdNome.MinimumWidth = 6;
+            GridProdNome.Name = "GridProdNome";
+            // 
+            // GridProdId
+            // 
+            GridProdId.HeaderText = "ID";
+            GridProdId.MinimumWidth = 6;
+            GridProdId.Name = "GridProdId";
             // 
             // ProdutoForm
             // 

@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\forge\\Desktop\\ESTUDOS\\ControleClientesV4.4-CEP\\ControleClientes\\ControleClientes.csproj": {}
+    "C:\\Users\\elito\\Desktop\\Controle-Clientes\\ControleClientes\\ControleClientes.csproj": {}
   },
   "projects": {
-    "C:\\Users\\forge\\Desktop\\ESTUDOS\\ControleClientesV4.4-CEP\\ControleClientes\\ControleClientes.csproj": {
+    "C:\\Users\\elito\\Desktop\\Controle-Clientes\\ControleClientes\\ControleClientes.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\forge\\Desktop\\ESTUDOS\\ControleClientesV4.4-CEP\\ControleClientes\\ControleClientes.csproj",
+        "projectUniqueName": "C:\\Users\\elito\\Desktop\\Controle-Clientes\\ControleClientes\\ControleClientes.csproj",
         "projectName": "ControleClientes",
-        "projectPath": "C:\\Users\\forge\\Desktop\\ESTUDOS\\ControleClientesV4.4-CEP\\ControleClientes\\ControleClientes.csproj",
-        "packagesPath": "C:\\Users\\forge\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\forge\\Desktop\\ESTUDOS\\ControleClientesV4.4-CEP\\ControleClientes\\obj\\",
+        "projectPath": "C:\\Users\\elito\\Desktop\\Controle-Clientes\\ControleClientes\\ControleClientes.csproj",
+        "packagesPath": "C:\\Users\\elito\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\elito\\Desktop\\Controle-Clientes\\ControleClientes\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\forge\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\elito\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -80,7 +80,7 @@
               "privateAssets": "none"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.403/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.400/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

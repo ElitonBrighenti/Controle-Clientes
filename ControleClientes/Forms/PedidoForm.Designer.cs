@@ -35,10 +35,6 @@
             btnCancelarPedido = new Button();
             tabPedidoConsulta = new TabPage();
             gridPedidos = new DataGridView();
-            GridProdId = new DataGridViewTextBoxColumn();
-            GridProdDesc = new DataGridViewTextBoxColumn();
-            GridProdNome = new DataGridViewTextBoxColumn();
-            GridProdPreco = new DataGridViewTextBoxColumn();
             pnlAcao = new Panel();
             btnVisualizar = new Button();
             btnNovoProd = new Button();
@@ -54,12 +50,7 @@
             cmbBoxCliente = new ComboBox();
             panel1 = new Panel();
             gridItensPedido = new DataGridView();
-            dataGridViewTextBoxColumn2 = new DataGridViewTextBoxColumn();
-            dataGridViewTextBoxColumn3 = new DataGridViewTextBoxColumn();
-            dataGridViewTextBoxColumn4 = new DataGridViewTextBoxColumn();
-            dataGridViewTextBoxColumn5 = new DataGridViewTextBoxColumn();
             pnlAcaoItem = new Panel();
-            btVisuaItem = new Button();
             btnAddItem = new Button();
             tabPedido = new TabControl();
             pnlAcaoPedido.SuspendLayout();
@@ -116,7 +107,6 @@
             btnCancelarPedido.TabIndex = 1;
             btnCancelarPedido.Text = "Cancelar";
             btnCancelarPedido.UseVisualStyleBackColor = true;
-            btnCancelarPedido.Click += btnCancelarPedido_Click;
             // 
             // tabPedidoConsulta
             // 
@@ -136,7 +126,6 @@
             // 
             gridPedidos.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             gridPedidos.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            gridPedidos.Columns.AddRange(new DataGridViewColumn[] { GridProdId, GridProdDesc, GridProdNome, GridProdPreco });
             gridPedidos.Dock = DockStyle.Fill;
             gridPedidos.Location = new Point(3, 45);
             gridPedidos.Margin = new Padding(3, 4, 3, 4);
@@ -145,30 +134,6 @@
             gridPedidos.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             gridPedidos.Size = new Size(890, 376);
             gridPedidos.TabIndex = 7;
-            // 
-            // GridProdId
-            // 
-            GridProdId.HeaderText = "ID";
-            GridProdId.MinimumWidth = 6;
-            GridProdId.Name = "GridProdId";
-            // 
-            // GridProdDesc
-            // 
-            GridProdDesc.HeaderText = "Cliente";
-            GridProdDesc.MinimumWidth = 6;
-            GridProdDesc.Name = "GridProdDesc";
-            // 
-            // GridProdNome
-            // 
-            GridProdNome.HeaderText = "Data Pedido";
-            GridProdNome.MinimumWidth = 6;
-            GridProdNome.Name = "GridProdNome";
-            // 
-            // GridProdPreco
-            // 
-            GridProdPreco.HeaderText = "Status";
-            GridProdPreco.MinimumWidth = 6;
-            GridProdPreco.Name = "GridProdPreco";
             // 
             // pnlAcao
             // 
@@ -315,7 +280,6 @@
             // 
             gridItensPedido.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             gridItensPedido.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            gridItensPedido.Columns.AddRange(new DataGridViewColumn[] { dataGridViewTextBoxColumn2, dataGridViewTextBoxColumn3, dataGridViewTextBoxColumn4, dataGridViewTextBoxColumn5 });
             gridItensPedido.Location = new Point(0, 38);
             gridItensPedido.Margin = new Padding(3, 4, 3, 4);
             gridItensPedido.Name = "gridItensPedido";
@@ -324,49 +288,14 @@
             gridItensPedido.Size = new Size(892, 262);
             gridItensPedido.TabIndex = 12;
             // 
-            // dataGridViewTextBoxColumn2
-            // 
-            dataGridViewTextBoxColumn2.HeaderText = "Produto";
-            dataGridViewTextBoxColumn2.MinimumWidth = 6;
-            dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-            // 
-            // dataGridViewTextBoxColumn3
-            // 
-            dataGridViewTextBoxColumn3.HeaderText = "Quantidade";
-            dataGridViewTextBoxColumn3.MinimumWidth = 6;
-            dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
-            // 
-            // dataGridViewTextBoxColumn4
-            // 
-            dataGridViewTextBoxColumn4.HeaderText = "Preco Unitário";
-            dataGridViewTextBoxColumn4.MinimumWidth = 6;
-            dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
-            // 
-            // dataGridViewTextBoxColumn5
-            // 
-            dataGridViewTextBoxColumn5.HeaderText = "Total";
-            dataGridViewTextBoxColumn5.MinimumWidth = 6;
-            dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
-            // 
             // pnlAcaoItem
             // 
-            pnlAcaoItem.Controls.Add(btVisuaItem);
             pnlAcaoItem.Controls.Add(btnAddItem);
             pnlAcaoItem.Dock = DockStyle.Top;
             pnlAcaoItem.Location = new Point(0, 0);
             pnlAcaoItem.Name = "pnlAcaoItem";
             pnlAcaoItem.Size = new Size(892, 38);
             pnlAcaoItem.TabIndex = 13;
-            // 
-            // btVisuaItem
-            // 
-            btVisuaItem.Location = new Point(624, 1);
-            btVisuaItem.Margin = new Padding(3, 4, 3, 4);
-            btVisuaItem.Name = "btVisuaItem";
-            btVisuaItem.Size = new Size(128, 31);
-            btVisuaItem.TabIndex = 2;
-            btVisuaItem.Text = "Visualizar Item";
-            btVisuaItem.UseVisualStyleBackColor = true;
             // 
             // btnAddItem
             // 
@@ -377,7 +306,7 @@
             btnAddItem.TabIndex = 1;
             btnAddItem.Text = "Adicionar Item";
             btnAddItem.UseVisualStyleBackColor = true;
-            btnAddItem.Click += btnAddItem_Click_1;
+            btnAddItem.Click += btnAddItem_Click;
             // 
             // tabPedido
             // 
@@ -399,6 +328,7 @@
             Controls.Add(tabPedido);
             Name = "PedidoForm";
             Text = "PedidoForm";
+            Load += PedidoForm_Load;
             pnlAcaoPedido.ResumeLayout(false);
             tabPedidoConsulta.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)gridPedidos).EndInit();
@@ -437,7 +367,6 @@
         private Panel panel1;
         private Panel pnlAcaoItem;
         private Button btnAddItem;
-        private Button btVisuaItem;
         private ComboBox cmbBoxCliente;
         private Button btnExcluirPedido;
         private ComboBox cmbBoxStatus;
@@ -446,13 +375,5 @@
         private Label DataPedLbl;
         private Label NomeCliePedLbl;
         private TabPage tabPedidoConsulta;
-        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
-        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
-        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
-        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
-        private DataGridViewTextBoxColumn GridProdId;
-        private DataGridViewTextBoxColumn GridProdDesc;
-        private DataGridViewTextBoxColumn GridProdNome;
-        private DataGridViewTextBoxColumn GridProdPreco;
     }
 }

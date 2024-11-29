@@ -32,10 +32,7 @@
             QtdeItemLbl = new Label();
             cmbBoxProduto = new ComboBox();
             pnlAcaoPedido = new Panel();
-            btnExcluirPedido = new Button();
-            btnCancelarPedido = new Button();
             btnSalvarItem = new Button();
-            btnAddProduto = new Button();
             numericUpDownQuantidade = new NumericUpDown();
             pnlAcaoPedido.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)numericUpDownQuantidade).BeginInit();
@@ -66,61 +63,29 @@
             cmbBoxProduto.Name = "cmbBoxProduto";
             cmbBoxProduto.Size = new Size(214, 28);
             cmbBoxProduto.TabIndex = 2;
+            cmbBoxProduto.SelectedIndexChanged += cmbBoxProduto_SelectedIndexChanged;
             // 
             // pnlAcaoPedido
             // 
             pnlAcaoPedido.AutoSize = true;
-            pnlAcaoPedido.Controls.Add(btnExcluirPedido);
-            pnlAcaoPedido.Controls.Add(btnCancelarPedido);
             pnlAcaoPedido.Controls.Add(btnSalvarItem);
             pnlAcaoPedido.Dock = DockStyle.Bottom;
             pnlAcaoPedido.Location = new Point(0, 200);
             pnlAcaoPedido.Margin = new Padding(3, 4, 3, 4);
             pnlAcaoPedido.Name = "pnlAcaoPedido";
-            pnlAcaoPedido.Size = new Size(606, 39);
+            pnlAcaoPedido.Size = new Size(487, 39);
             pnlAcaoPedido.TabIndex = 6;
-            // 
-            // btnExcluirPedido
-            // 
-            btnExcluirPedido.Location = new Point(6, 4);
-            btnExcluirPedido.Margin = new Padding(3, 4, 3, 4);
-            btnExcluirPedido.Name = "btnExcluirPedido";
-            btnExcluirPedido.Size = new Size(86, 31);
-            btnExcluirPedido.TabIndex = 2;
-            btnExcluirPedido.Text = "Excluir";
-            btnExcluirPedido.UseVisualStyleBackColor = true;
-            // 
-            // btnCancelarPedido
-            // 
-            btnCancelarPedido.Location = new Point(508, 4);
-            btnCancelarPedido.Margin = new Padding(3, 4, 3, 4);
-            btnCancelarPedido.Name = "btnCancelarPedido";
-            btnCancelarPedido.Size = new Size(86, 31);
-            btnCancelarPedido.TabIndex = 1;
-            btnCancelarPedido.Text = "Cancelar";
-            btnCancelarPedido.UseVisualStyleBackColor = true;
             // 
             // btnSalvarItem
             // 
-            btnSalvarItem.Location = new Point(416, 4);
+            btnSalvarItem.Location = new Point(381, 4);
             btnSalvarItem.Margin = new Padding(3, 4, 3, 4);
             btnSalvarItem.Name = "btnSalvarItem";
-            btnSalvarItem.Size = new Size(86, 31);
+            btnSalvarItem.Size = new Size(103, 31);
             btnSalvarItem.TabIndex = 0;
-            btnSalvarItem.Text = "Salvar";
+            btnSalvarItem.Text = "Adicionar";
             btnSalvarItem.UseVisualStyleBackColor = true;
             btnSalvarItem.Click += btnSalvarItem_Click;
-            // 
-            // btnAddProduto
-            // 
-            btnAddProduto.Location = new Point(470, 59);
-            btnAddProduto.Margin = new Padding(3, 4, 3, 4);
-            btnAddProduto.Name = "btnAddProduto";
-            btnAddProduto.Size = new Size(113, 31);
-            btnAddProduto.TabIndex = 0;
-            btnAddProduto.Text = "Adicionar";
-            btnAddProduto.UseVisualStyleBackColor = true;
-            btnAddProduto.Click += btnAddProduto_Click;
             // 
             // numericUpDownQuantidade
             // 
@@ -133,15 +98,15 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(606, 239);
+            ClientSize = new Size(487, 239);
             Controls.Add(numericUpDownQuantidade);
             Controls.Add(pnlAcaoPedido);
             Controls.Add(cmbBoxProduto);
-            Controls.Add(btnAddProduto);
             Controls.Add(QtdeItemLbl);
             Controls.Add(ProdItemLbl);
             Name = "ItemForm";
             Text = "ItemForm";
+            Load += ItemForm_Load;
             pnlAcaoPedido.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)numericUpDownQuantidade).EndInit();
             ResumeLayout(false);
@@ -154,9 +119,6 @@
         private Label QtdeItemLbl;
         private ComboBox cmbBoxProduto;
         private Panel pnlAcaoPedido;
-        private Button btnExcluirPedido;
-        private Button btnCancelarPedido;
-        private Button btnAddProduto;
         private NumericUpDown numericUpDownQuantidade;
         private Button btnSalvarItem;
     }

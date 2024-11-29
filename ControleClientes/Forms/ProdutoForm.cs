@@ -114,6 +114,10 @@ namespace ControleClientes
                 textBoxCatProd.Text = produtoSelecionado.Categoria.ToString();
                 tabProduto.SelectTab(tabProdutoCadastro);
             }
+            else
+            {
+                MessageBox.Show("ERRO");
+            }
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)

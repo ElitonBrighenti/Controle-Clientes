@@ -16,43 +16,54 @@ namespace ControleClientes.Repository
         {
             _context = context;
         }
+
         public List<Pedido> ReadAll()
         {
-            return _context.Pedidos.ToList();
+            return _context.Pedidos
+                .Include(p => p.Cliente)
+                .Include(p => p.Itens)
+                .ThenInclude(i => i.Produto)
+                .ToList();
         }
+
         public void Create(Pedido pedido)
         {
             _context.Pedidos.Add(pedido);
             _context.SaveChanges();
         }
 
-        //public Pedido GetById(int id)
-        //{
-        //    return _context.Pedidos
-        //        .Include(p => p.Id)
-        //        .ThenInclude(i => i.Produto)
-        //        .FirstOrDefault(p => p.Id == id);
-        //}
-
-        public List<Pedido> GetAll()
-        {
-            return _context.Pedidos.ToList();
-        }
-
         public void Update(Pedido pedido)
         {
-            _context.Pedidos.Update(pedido);
-            _context.SaveChanges();
+            Pedido pedidoExistente = GetById(pedido.Id);
+            if (pedidoExistente != null)
+            {
+                pedidoExistente.Data = pedido.Data;
+                pedidoExistente.Status = pedido.Status;
+                pedidoExistente.ClienteId = pedido.ClienteId;
+                pedidoExistente.Itens = pedido.Itens;
+                _context.SaveChanges();
+            }
         }
 
-        public void Delete(int id)
+        public void Delete(Pedido pedido)
         {
-            //var pedido = GetById(id);
-            //if (pedido != null)
-            //{
-            //    _context.Pedidos.Remove(pedido);
-            //    _context.SaveChanges();
-            //}
+            Pedido pedidoExistente = GetById(pedido.Id);
+            if (pedidoExistente != null)
+            {
+                _context.Pedidos.Remove(pedidoExistente);
+                _context.SaveChanges();
+            }
+        }
+
+        public Pedido GetById(int id)
+        {
+            return _context.Pedidos
+                .Include(p => p.Cliente)
+                .Include(p => p.Itens)
+                .ThenInclude(i => i.Produto)
+                .FirstOrDefault(p => p.Id == id);
         }
     }
+
+
 }

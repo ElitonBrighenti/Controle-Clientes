@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace ControleClientes.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    [Migration("20241128152020_One")]
-    partial class One
+    [Migration("20241128233305_First")]
+    partial class First
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -168,7 +168,7 @@ namespace ControleClientes.Migrations
                     b.ToTable("Enderecos");
                 });
 
-            modelBuilder.Entity("ControleClientes.Entidades.Item", b =>
+            modelBuilder.Entity("ControleClientes.Entidades.ItemPedido", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -179,15 +179,22 @@ namespace ControleClientes.Migrations
                     b.Property<int>("PedidoId")
                         .HasColumnType("integer");
 
-                    b.Property<int[]>("Quantidades")
-                        .IsRequired()
-                        .HasColumnType("integer[]");
+                    b.Property<decimal>("PrecoUnitario")
+                        .HasColumnType("numeric");
+
+                    b.Property<int>("ProdutoId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("Quantidade")
+                        .HasColumnType("integer");
 
                     b.HasKey("Id");
 
                     b.HasIndex("PedidoId");
 
-                    b.ToTable("Itens");
+                    b.HasIndex("ProdutoId");
+
+                    b.ToTable("ItensPedidos");
                 });
 
             modelBuilder.Entity("ControleClientes.Entidades.Pedido", b =>
@@ -201,7 +208,7 @@ namespace ControleClientes.Migrations
                     b.Property<int>("ClienteId")
                         .HasColumnType("integer");
 
-                    b.Property<DateTime>("DataPedido")
+                    b.Property<DateTime>("Data")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Status")
@@ -231,9 +238,6 @@ namespace ControleClientes.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<int?>("ItemId")
-                        .HasColumnType("integer");
-
                     b.Property<string>("Nome")
                         .IsRequired()
                         .HasColumnType("text");
@@ -245,8 +249,6 @@ namespace ControleClientes.Migrations
                         .HasColumnType("integer");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ItemId");
 
                     b.ToTable("Produtos");
                 });
@@ -273,7 +275,7 @@ namespace ControleClientes.Migrations
                     b.Navigation("Cidade");
                 });
 
-            modelBuilder.Entity("ControleClientes.Entidades.Item", b =>
+            modelBuilder.Entity("ControleClientes.Entidades.ItemPedido", b =>
                 {
                     b.HasOne("ControleClientes.Entidades.Pedido", "Pedido")
                         .WithMany("Itens")
@@ -281,13 +283,21 @@ namespace ControleClientes.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("ControleClientes.Entidades.Produto", "Produto")
+                        .WithMany()
+                        .HasForeignKey("ProdutoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("Pedido");
+
+                    b.Navigation("Produto");
                 });
 
             modelBuilder.Entity("ControleClientes.Entidades.Pedido", b =>
                 {
                     b.HasOne("ControleClientes.Entidades.Cliente", "Cliente")
-                        .WithMany()
+                        .WithMany("Pedidos")
                         .HasForeignKey("ClienteId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -295,16 +305,9 @@ namespace ControleClientes.Migrations
                     b.Navigation("Cliente");
                 });
 
-            modelBuilder.Entity("ControleClientes.Entidades.Produto", b =>
+            modelBuilder.Entity("ControleClientes.Entidades.Cliente", b =>
                 {
-                    b.HasOne("ControleClientes.Entidades.Item", null)
-                        .WithMany("Produtos")
-                        .HasForeignKey("ItemId");
-                });
-
-            modelBuilder.Entity("ControleClientes.Entidades.Item", b =>
-                {
-                    b.Navigation("Produtos");
+                    b.Navigation("Pedidos");
                 });
 
             modelBuilder.Entity("ControleClientes.Entidades.Pedido", b =>
