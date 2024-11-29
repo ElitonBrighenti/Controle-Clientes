@@ -35,6 +35,10 @@
             btnCancelarPedido = new Button();
             tabPedidoConsulta = new TabPage();
             gridPedidos = new DataGridView();
+            Id = new DataGridViewTextBoxColumn();
+            Nome = new DataGridViewTextBoxColumn();
+            Data = new DataGridViewTextBoxColumn();
+            Status = new DataGridViewTextBoxColumn();
             pnlAcao = new Panel();
             btnVisualizar = new Button();
             btnNovoProd = new Button();
@@ -97,6 +101,7 @@
             btnExcluirPedido.TabIndex = 2;
             btnExcluirPedido.Text = "Excluir";
             btnExcluirPedido.UseVisualStyleBackColor = true;
+            btnExcluirPedido.Click += btnExcluirPedido_Click;
             // 
             // btnCancelarPedido
             // 
@@ -126,6 +131,7 @@
             // 
             gridPedidos.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             gridPedidos.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            gridPedidos.Columns.AddRange(new DataGridViewColumn[] { Id, Nome, Data, Status });
             gridPedidos.Dock = DockStyle.Fill;
             gridPedidos.Location = new Point(3, 45);
             gridPedidos.Margin = new Padding(3, 4, 3, 4);
@@ -134,6 +140,30 @@
             gridPedidos.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             gridPedidos.Size = new Size(890, 376);
             gridPedidos.TabIndex = 7;
+            // 
+            // Id
+            // 
+            Id.HeaderText = "Id Pedido";
+            Id.MinimumWidth = 6;
+            Id.Name = "Id";
+            // 
+            // Nome
+            // 
+            Nome.HeaderText = "Nome Cliente";
+            Nome.MinimumWidth = 6;
+            Nome.Name = "Nome";
+            // 
+            // Data
+            // 
+            Data.HeaderText = "Data Pedido";
+            Data.MinimumWidth = 6;
+            Data.Name = "Data";
+            // 
+            // Status
+            // 
+            Status.HeaderText = "Status ";
+            Status.MinimumWidth = 6;
+            Status.Name = "Status";
             // 
             // pnlAcao
             // 
@@ -375,5 +405,10 @@
         private Label DataPedLbl;
         private Label NomeCliePedLbl;
         private TabPage tabPedidoConsulta;
+        private DataGridViewTextBoxColumn Column1;
+        private DataGridViewTextBoxColumn Id;
+        private DataGridViewTextBoxColumn Nome;
+        private DataGridViewTextBoxColumn Data;
+        private DataGridViewTextBoxColumn Status;
     }
 }

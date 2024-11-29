@@ -20,5 +20,6 @@ namespace ControleClientes.Entidades
 
         public int Quantidade { get; set; }
         public decimal PrecoUnitario { get; set; }
+
     }
 }

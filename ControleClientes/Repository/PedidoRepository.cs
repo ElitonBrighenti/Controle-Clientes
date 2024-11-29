@@ -45,15 +45,43 @@ namespace ControleClientes.Repository
             }
         }
 
-        public void Delete(Pedido pedido)
+        //METODO DELETAR ANTIGO
+        //public void Delete(Pedido pedido)
+        //{
+        //    Pedido pedidoExistente = GetById(pedido.Id);
+        //    if (pedidoExistente != null)
+        //    {
+        //        _context.Pedidos.Remove(pedidoExistente);
+        //        _context.SaveChanges();
+        //    }
+        //}
+        // PedidoRepository.cs
+        public void Delete(int pedidoId)
         {
-            Pedido pedidoExistente = GetById(pedido.Id);
-            if (pedidoExistente != null)
+            var pedido = _context.Pedidos
+                .Include(p => p.Itens) // Carregar itens associados
+                .FirstOrDefault(p => p.Id == pedidoId);
+
+            if (pedido != null)
             {
-                _context.Pedidos.Remove(pedidoExistente);
-                _context.SaveChanges();
+                // Remover os itens diretamente, sem depender de ItensPedido
+                foreach (var item in pedido.Itens.ToList())
+                {
+                    _context.ItensPedidos.Remove(item); // Remover itens
+                }
+
+                _context.Pedidos.Remove(pedido); // Remover o pedido
+                _context.SaveChanges(); // Salvar alterações
+            }
+            else
+            {
+                throw new Exception("Pedido não encontrado.");
             }
         }
+
+
+
+
 
         public Pedido GetById(int id)
         {

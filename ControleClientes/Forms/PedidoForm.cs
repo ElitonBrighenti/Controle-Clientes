@@ -1,6 +1,7 @@
 ﻿using ControleClientes.Entidades;
 using ControleClientes.Forms;
 using ControleClientes.Repository;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,6 +16,9 @@ namespace ControleClientes
         private readonly ClienteRepository _clienteRepository;
         private readonly PedidoRepository _pedidoRepository;
         private readonly ItemPedidoRepository _itemRepository;
+
+        private Pedido pedidoSelecionado;  // Variável global para o pedido selecionado
+
         public PedidoForm()
         {
             _pedidoRepository = new PedidoRepository(new ApplicationDBContext());
@@ -27,15 +31,12 @@ namespace ControleClientes
 
         private void PedidoForm_Load(object sender, EventArgs e)
         {
-            // Configurar grid de itens
-            ConfigurarGridItens();
-
-            // Inicializar grid com lista vazia
-            gridItensPedido.DataSource = new BindingList<ItemPedido>();
+            gridItensPedido.DataSource = new BindingList<ItemPedido>();  // Inicializa a grid de itens vazia
         }
+
         private void CarregarDados()
         {
-            cmbBoxCliente.DataSource = _clienteRepository.ReadAll(); // Assumindo que o ClienteRepository está implementado corretamente
+            cmbBoxCliente.DataSource = _clienteRepository.ReadAll();
             cmbBoxCliente.DisplayMember = "Nome";
             cmbBoxCliente.ValueMember = "Id";
             cmbBoxStatus.DataSource = new List<string> { "Pendente", "Concluído", "Cancelado" };
@@ -43,13 +44,14 @@ namespace ControleClientes
 
         private void LoadPedidos()
         {
-            using (var db = new ApplicationDBContext())
+            gridPedidos.Rows.Clear();
+            foreach (var pedido in _pedidoRepository.ReadAll())
             {
-                gridPedidos.DataSource = new PedidoRepository(db).ReadAll();
+                gridPedidos.Rows.Add(pedido.Id, pedido.Cliente.Nome, pedido.Data, pedido.Status);
             }
         }
 
-        private void btnVisualizar_Click(object sender, EventArgs e)
+        private void btnVisualizar_Click_1(object sender, EventArgs e)
         {
             if (gridPedidos.SelectedRows.Count > 0)
             {
@@ -57,27 +59,37 @@ namespace ControleClientes
                 CarregarPedidoParaEdicao(pedidoId);
             }
         }
+
         private void CarregarPedidoParaEdicao(int pedidoId)
         {
-            //using (var db = new ApplicationDBContext())
-            //{
-            //    Pedido pedido = new PedidoRepository(db).GetById(pedidoId);
-            //    if (pedido != null)
-            //    {
-            //        cmbCliente.SelectedValue = pedido.ClienteId;
-            //        dtpData.Value = pedido.Data;
-            //        cmbStatus.SelectedItem = pedido.Status;
+            using (var db = new ApplicationDBContext())
+            {
+                pedidoSelecionado = new PedidoRepository(db).GetById(pedidoId);
+                if (pedidoSelecionado != null)
+                {
+                    cmbBoxCliente.SelectedValue = pedidoSelecionado.ClienteId;
+                    dateTimePickerDataPedido.Value = pedidoSelecionado.Data.ToLocalTime();
+                    cmbBoxStatus.SelectedItem = pedidoSelecionado.Status;
 
-            //        gridItens.DataSource = pedido.Itens;
-            //        tabControl1.SelectTab("tabCadastro");
-            //    }
-            //}
+                    // Carrega os itens do pedido na grid
+                    //gridItensPedido.DataSource = new BindingList<ItemPedido>(pedidoSelecionado.Itens);
+                    tabPedido.SelectTab(tabPedidoCadastro);
+                }
+                else
+                {
+                    MessageBox.Show("Pedido não encontrado!", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
         }
+
         private void btnNovoProd_Click(object sender, EventArgs e)
         {
             tabPedido.SelectTab(tabPedidoCadastro);
-            //ClearCadastro();
+            // Limpar os campos ou preparar o formulário
+            pedidoSelecionado = new Pedido(); // Cria um novo pedido ao clicar em "Novo"
+            gridItensPedido.DataSource = new BindingList<ItemPedido>(); // Limpa os itens
         }
+
         private void btnAddItem_Click(object sender, EventArgs e)
         {
             using (ItemForm itemForm = new ItemForm())
@@ -85,111 +97,71 @@ namespace ControleClientes
                 if (itemForm.ShowDialog() == DialogResult.OK)
                 {
                     ItemPedido novoItem = (ItemPedido)itemForm.Tag;
-
-                    // Obter a lista atual de itens do pedido
                     var itens = (BindingList<ItemPedido>)gridItensPedido.DataSource;
-
-                    // Adicionar o novo item à lista
-                    itens.Add(novoItem);
-
-                    // Atualizar a grid
+                    itens.Add(novoItem); // Adiciona o novo item
                     gridItensPedido.DataSource = null;
-                    gridItensPedido.DataSource = itens;
+                    gridItensPedido.DataSource = itens; // Atualiza a grid de itens
                 }
             }
         }
-        private void ConfigurarGridItens()
-        {
-            gridItensPedido.AutoGenerateColumns = false;
 
-            gridItensPedido.Columns.Add(new DataGridViewTextBoxColumn
-            {
-                HeaderText = "Produto",
-                DataPropertyName = "Produto.Nome"
-            });
-
-            gridItensPedido.Columns.Add(new DataGridViewTextBoxColumn
-            {
-                HeaderText = "Quantidade",
-                DataPropertyName = "Quantidade"
-            });
-
-            gridItensPedido.Columns.Add(new DataGridViewTextBoxColumn
-            {
-                HeaderText = "Preço Unitário",
-                DataPropertyName = "PrecoUnitario",
-                DefaultCellStyle = new DataGridViewCellStyle { Format = "C2" }
-            });
-
-            gridItensPedido.Columns.Add(new DataGridViewTextBoxColumn
-            {
-                HeaderText = "Subtotal",
-                DataPropertyName = "Subtotal",
-                DefaultCellStyle = new DataGridViewCellStyle { Format = "C2" }
-            });
-        }
         private void btnSalvarPedido_Click(object sender, EventArgs e)
         {
             using (var db = new ApplicationDBContext())
             {
-                PedidoRepository pedidoRepo = new PedidoRepository(db);
+                var pedidoRepo = new PedidoRepository(db);
 
-                Pedido pedido = new Pedido
+                // Se o pedidoSelecionado não estiver instanciado (é nulo), criamos um novo
+                if (pedidoSelecionado == null)
                 {
-                    Data = dateTimePickerDataPedido.Value.ToUniversalTime(),
-                    Status = cmbBoxStatus.SelectedItem.ToString(),
-                    ClienteId = (int)cmbBoxCliente.SelectedValue,
-                    Itens = (BindingList<ItemPedido>)gridItensPedido.DataSource
-                };
+                    pedidoSelecionado = new Pedido();
+                }
 
-                if (pedido.Id == 0)
+                // Atualiza os dados do pedido
+                pedidoSelecionado.Data = dateTimePickerDataPedido.Value.ToUniversalTime();
+                pedidoSelecionado.Status = cmbBoxStatus.SelectedItem.ToString();
+                pedidoSelecionado.ClienteId = (int)cmbBoxCliente.SelectedValue;
+                pedidoSelecionado.Itens = ((BindingList<ItemPedido>)gridItensPedido.DataSource).ToList();
+
+                // Salva ou atualiza o pedido
+                if (pedidoSelecionado.Id > 0)
                 {
-                    // Criação de novo pedido
-                    pedidoRepo.Create(pedido);
+                    pedidoRepo.Update(pedidoSelecionado); // Atualiza pedido existente
                 }
                 else
                 {
-                    // Atualização de pedido existente
-                    pedidoRepo.Update(pedido);
+                    pedidoRepo.Create(pedidoSelecionado); // Cria um novo pedido
                 }
             }
 
+            // Recarrega a lista de pedidos e volta para a aba de consulta
             LoadPedidos();
             tabPedido.SelectTab(tabPedidoConsulta);
+            MessageBox.Show("Pedido salvo com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
-        private void btnVisualizar_Click_1(object sender, EventArgs e)
+
+        private void btnExcluirPedido_Click(object sender, EventArgs e)
         {
             if (gridPedidos.SelectedRows.Count > 0)
             {
                 int pedidoId = (int)gridPedidos.SelectedRows[0].Cells["Id"].Value;
 
-                using (var db = new ApplicationDBContext())
+                try
                 {
-                    Pedido pedido = new PedidoRepository(db).GetById(pedidoId);
-
-                    if (pedido != null)
-                    {
-                        // Preenche os campos da aba Cadastro
-
-                        cmbBoxCliente.SelectedValue = pedido.ClienteId;
-                        dateTimePickerDataPedido.Value = pedido.Data.ToLocalTime();
-                        cmbBoxStatus.SelectedItem = pedido.Status;
-
-                        // Preenche a grid de itens
-                        //gridItensPedido.DataSource = new BindingList<ItemPedido>(pedido.Itens);
-
-                        // Navega para a aba de Cadastro
-                        tabPedido.SelectTab(tabPedidoCadastro);
-                    }
-                    else
-                    {
-                        MessageBox.Show("Pedido não encontrado!", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
+                    // Exclui o pedido
+                    _pedidoRepository.Delete(pedidoId);
+                    LoadPedidos();
+                    tabPedido.SelectTab(tabPedidoConsulta);
+                    MessageBox.Show("Pedido excluído com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Erro ao excluir o pedido: " + ex.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             else
             {
-                MessageBox.Show("Selecione um pedido para visualizar.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Selecione um pedido para excluir.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
     }

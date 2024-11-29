@@ -13,6 +13,8 @@ namespace ControleClientes.Forms
             InitializeComponent();
         }
 
+        #region Carregar Dados
+
         private void ItemForm_Load(object sender, EventArgs e)
         {
             LoadProdutos();
@@ -28,6 +30,10 @@ namespace ControleClientes.Forms
             }
         }
 
+        #endregion
+
+        #region Botões
+
         private void btnSalvarItem_Click(object sender, EventArgs e)
         {
             if (cmbBoxProduto.SelectedValue != null && numericUpDownQuantidade.Value > 0)
@@ -37,13 +43,13 @@ namespace ControleClientes.Forms
                 ItemPedido item = new ItemPedido
                 {
                     ProdutoId = produtoSelecionado.Id,
-                    Produto = null, //produtoSelecionado,
+                    Produto = null, // Produto não é carregado diretamente, pode ser necessário carregar os detalhes de produto
                     Quantidade = (int)numericUpDownQuantidade.Value,
                     PrecoUnitario = produtoSelecionado.Preco
                 };
 
-                this.Tag = item;
-                this.DialogResult = DialogResult.OK;
+                this.Tag = item; // Passando o item para o form principal
+                this.DialogResult = DialogResult.OK; // Fechando o form com sucesso
                 this.Close();
             }
             else
@@ -52,9 +58,17 @@ namespace ControleClientes.Forms
             }
         }
 
+        #endregion
+
+        #region Métodos de Controle de Interface
+
         private void cmbBoxProduto_SelectedIndexChanged(object sender, EventArgs e)
         {
-
+            // Aqui você pode adicionar lógica adicional para quando o produto for alterado, 
+            // caso queira atualizar os preços ou outros campos do item.
         }
+
+        #endregion
     }
+
 }

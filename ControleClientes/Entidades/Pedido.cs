@@ -17,7 +17,6 @@ namespace ControleClientes.Entidades
         public int ClienteId { get; set; }
         public Cliente Cliente { get; set; }
 
-        public ICollection<ItemPedido> Itens { get; set; } = new List<ItemPedido>();
-
+        public ICollection<ItemPedido> Itens { get; set; }
     }
 }
